@@ -18,7 +18,7 @@
   
 ### Introduction
 
-Genetic variants leading to loss of function are not found in all genes. If a gene is found under selection pressure, protein truncation variants (PTV) are much less common in them (Cassa C. 2017). Most often, such genes have important functions, and a such catastrophic change in the protein leads to various diseases or death (Samocha K., 2014). In this work, we are interested in the case when the division of genes into conservative (that is, under selection) and non-conservative (that is, free from selection) becomes less unambiguous, namely, cases when non-conservative genes are found in relatively conservative genes. This work is devoted to implementation of algorithm to the search for such sequences.
+Genetic variants leading to loss of function are not found in all genes. If a gene is found under selection pressure, protein truncation variants (PTV) are much less common in them (Cassa C., 2017). Most often, such genes have important functions, and a such catastrophic change in the protein leads to various diseases or death (Samocha K., 2014). In this work, we are interested in the case when the division of genes into conservative (that is, under selection) and non-conservative (that is, free from selection) becomes less unambiguous, namely, cases when non-conservative genes are found in relatively conservative genes. This work is devoted to implementation of algorithm to the search for such sequences.
 
 
 ### Goal:
@@ -141,7 +141,7 @@ Also change the approach to calculating the allele number for regions where no P
   
 
  **Requirements for the pipeline**: 
- - agrep tool
+ - agrep tool;
  - Python v3.9.10 (the requirements for computing packages are specified in `requirements.txt`);
  - samtools v1.14;
  - bedtools v2.30.0;
