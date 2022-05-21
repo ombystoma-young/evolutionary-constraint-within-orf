@@ -109,7 +109,7 @@ As mentioned above, we have chosen $s_{het}$ as an estimate of conservativeness.
   
   We have chosen as the emission probabilities ($e_k(n_i)$ for $n_i$ in $k$-th state) the normalized probabilities obtained by taking a certain integral:
   
-  $$ e_k(n_i) = \frac{P(n_i | \alpha, \beta; \nu_i; a, b)}{P(n_i | \alpha, \beta; \nu_i)} =  \frac{\int\limits_{a}^{b}  Pois(n_i, \nu / s_{het}) IG(s_{het};\alpha, \beta) ds_{het}}{P(n_i | \alpha, \beta; \nu_i)},$$
+  $$ e_k(n_i) = \frac{P(n_i | \alpha, \beta; \nu_i; a, b)}{P(n_i | \alpha, \beta; \nu_i)} =  \frac{\int\limits_{a}^{b}  Pois(n_i, \nu_i / s_{het}) IG(s_{het};\alpha, \beta) ds_{het}}{P(n_i | \alpha, \beta; \nu_i)},$$
   
   where $a, b = [0, 0.01]$ for $k=Not$ and  $a, b = [0.01, 1]$ for $k=Cons$. The choice of such values is also due to the results obtained in the work  Cassa C. 2017.
   
@@ -150,7 +150,7 @@ Also change the approach to calculating the allele number for regions where no P
 ### Literature  
 - Cassa, C., Weghorn, D., Balick, D. _et al_. Estimating the selective effects of heterozygous protein-truncating variants from human exome data. _Nat Genet_ 49, 806–810 (2017). 
 - Danecek, P., Bonfield, J.K., Liddle, J., Li, H. _et al_. Twelve years of SAMtools and BCFtools. _GigaScience_, 10(2), (2021).  
-- Davis, R.I. and Lovell, B.C.. 2003. Comparing and evaluating HMM ensemble training algorithms using train and test and condition number criteria. _Pattern Anal. Appl._ 6, 4, pp. 327–336, (2003).
+- Davis, R.I. and Lovell, B.C. Comparing and evaluating HMM ensemble training algorithms using train and test and condition number criteria. _Pattern Anal. Appl._ 6, 4, pp. 327–336, (2003).
 - Frankish, A., Diekhans, M., Jungreis, I., _et al_. GENCODE 2021. _Nucleic Acids Research_. 49(D1):D916-D923 (2021). 
 - Karczewski, K.J., Francioli, L.C., Tiao, G. _et al_. The mutational constraint spectrum quantified from variation in 141,456 humans. _Nature_, 581, pp. 434–443 (2020).
 - Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J.. Sustainable data analysis with Snakemake. _F1000Res_ 10, 33. (2021)
