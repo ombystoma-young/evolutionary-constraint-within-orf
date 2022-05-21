@@ -3,9 +3,6 @@
 
 </br>
 
-
-</br>
-
 # Analysis of variable evolutionary constraint within a single ORF
 
 
@@ -40,7 +37,7 @@ Also mutation rates in the trinucleotide context were taken from the work of Kar
 
 ### Workflow
 
-First, we needed to obtain data on the protein coding sequence for the gene of interest, namely the nucleotide sequence itself, the CDS coordinates, as well as information about the observed PTV for this gene. The data obtaining scheme is presented below.
+First, we needed to obtain data on the coding DNA sequence (CDS) for the gene of interest, namely the nucleotide sequence itself, the CDS coordinates, as well as information about the observed PTV for this gene. The data obtaining scheme is presented below.
   
 ![data extraction_dark](https://user-images.githubusercontent.com/90496643/169656440-21dc1e00-4e72-41df-97f1-f0c8491a69a7.svg#gh-dark-mode-only)
 ![data extraction_light](https://user-images.githubusercontent.com/90496643/169656437-3d3d2928-4034-4cdc-8660-05ef248b6951.svg#gh-light-mode-only)
@@ -48,7 +45,7 @@ First, we needed to obtain data on the protein coding sequence for the gene of i
   
   
 #### Stage 1. Sequence extraction  
-  We started by getting the CDS coordinates from `.gff3` file. To do this, we used a combination of `grep`, `agrep` and `awk` (presented in the file `get_cds.sh`). In order to calculate the mutation rate in the trinucleotide context (described below), we also needed nucleotides before and after each protein-coding site.  
+  We started by getting the CDS coordinates from `.gff3` file. To do this, we used a combination of `grep`, `agrep` and `awk` (presented in the file `get_cds.sh`). In order to calculate the mutation rate in the trinucleotide context (described below), we also needed nucleotides before and after each region of coding DNA sequence (CDS).  
 After that, we indexed the file .fa using `samtools faidx` (Danecek P., 2021):  
   
 ```sh  
@@ -117,7 +114,7 @@ As mentioned above, we have chosen $s_{het}$ as an estimate of conservativeness.
   
   where $a, b = [0, 0.01]$ for $k=Not$ and  $a, b = [0.01, 1]$ for $k=Cons$. The choice of such values is also due to the results obtained in the work  Cassa C. 2017.
   
-  Since we had no assumptions about the transition probabilities, we used the Baum-Welsch algorithm to find transition probabilities corresponding to the maximum likelihood of the model.
+  Since we had no assumptions about the transition probabilities, we used the Baum–Welch algorithm to find transition probabilities corresponding to the maximum likelihood of the model.
   
   #### Stage 5.2. Decoding sequence
   
