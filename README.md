@@ -1,10 +1,15 @@
- 
-  
+![[logo-bi-18-7| width=10px]](https://user-images.githubusercontent.com/90496643/169656572-a93ad3c6-2e70-481a-b749-470e02f84e7e.svg#gh-dark-mode-only)
+![logo-bi-18-3](https://user-images.githubusercontent.com/90496643/169656574-08b10a55-abe4-401b-bdd2-c9518c4c4f38.svg#gh-light-mode-only)
+
+</br>
+
+
+</br>
+
 # Analysis of variable evolutionary constraint within a single ORF
 
 
-  
-  
+
 **Author**  
 - Oksana Kotovskaya
 
@@ -37,10 +42,8 @@ Also mutation rates in the trinucleotide context were taken from the work of Kar
 
 First, we needed to obtain data on the protein coding sequence for the gene of interest, namely the nucleotide sequence itself, the CDS coordinates, as well as information about the observed PTV for this gene. The data obtaining scheme is presented below.
   
-
-![data extraction](https://user-images.githubusercontent.com/90496643/169602206-52008542-747f-459d-b986-532104f44cd2.svg#gh-dark-mode-only)
-![data extraction_light](https://user-images.githubusercontent.com/90496643/169626891-1cd77e25-51b7-4694-b7e7-716701f67cea.svg#gh-light-mode-only)
-
+![data extraction_dark](https://user-images.githubusercontent.com/90496643/169656440-21dc1e00-4e72-41df-97f1-f0c8491a69a7.svg#gh-dark-mode-only)
+![data extraction_light](https://user-images.githubusercontent.com/90496643/169656437-3d3d2928-4034-4cdc-8660-05ef248b6951.svg#gh-light-mode-only)
 
   
   
@@ -70,9 +73,10 @@ Thus, for each nucleotide, we considered three possible substitutions in a trinu
   
 Next, we divided the gene into regions of fixed length, scanning window. We did not fix _window size_ it for all genes, because the length of genes varies very much, and in the case of too small values of the window size, it becomes problematic to resolve long non-conservative regions (if there are any). For each window, the sum of the expected frequencies was calculated (example for gene ARFGEF1 presented below).
   
-![test_rasterization](https://user-images.githubusercontent.com/90496643/169624393-7cbd8028-1cd7-46b3-9b8a-ed437247ef96.svg#gh-dark-mode-only)
+![test_rasterization_dark](https://user-images.githubusercontent.com/90496643/169657497-cd9d0be2-a419-49ee-a576-bae184c2005d.svg#gh-dark-mode-only)
+![test_rasterization_light](https://user-images.githubusercontent.com/90496643/169657498-dfb865f8-253e-4b86-8a87-2b2800ae27a6.svg#gh-light-mode-only)
 
-![test_rasterization_light](https://user-images.githubusercontent.com/90496643/169626995-ee7239e8-f4e3-4103-ba4b-2d8e9f9d5884.svg#gh-light-mode-only)
+
 
  The resulting distribution of mutation rates corresponds to the expected: the mutation level for missense mutations is higher than the mutation level for synonymous variants, while loss-of-function (LoF) mutations are lower than all. 
   For further analysis, we needed LoF mutation rates ($U$).
@@ -89,11 +93,11 @@ For regions in which no protein truncation variants were detected, we took the $
 As observations, we choose the allele count per window $n$ (since it is finite, we can consider this quantity discrete).
 
 To assess conservativeness, we used a estimation of the selective effect against heterozygous PTVs ($s_{het}$) that takes into account for each region the observed value of protein truncation variants (PTV) $n$, the allele numbers $N$ and the expected mutation rate.
-  
-![HMM](https://user-images.githubusercontent.com/90496643/169617524-9c126822-a8c2-40f6-ad30-e09f3645ca5c.svg#gh-dark-mode-only)
-![HMM_light](https://user-images.githubusercontent.com/90496643/169627096-d189e31c-5bea-495d-887f-61a8de947b34.svg#gh-light-mode-only)
+ 
 
-    
+![Evolutionary conservativeness of ORF regions_dark](https://user-images.githubusercontent.com/90496643/169657643-81083110-c36f-4316-9505-a6ef2bf2486f.svg#gh-dark-mode-only)
+![Evolutionary conservativeness of ORF regions_light](https://user-images.githubusercontent.com/90496643/169657645-9908d55b-fdb0-49f0-a839-f7b8f93d52f3.svg#gh-light-mode-only)
+
 
 #### Stage 5.1. Search of HMM parameters. 
 As mentioned above, we have chosen $s_{het}$ as an estimate of conservativeness. Similarly to the work of Cassa C. 2017, we assumed the observed distribution of PTV counts across $i$-th region:
@@ -128,8 +132,8 @@ The algorithm was tested on set of genes: mostly conservative, mostly non-conser
   
 There is a graph below showing the dependence of the allele counts per window for the regions of the gene ARFGEF1. In the case of a large number of alleles, the algorithm with the specified parameters copes with finding the most conservative region.
 
-  ![tr_tst2](https://user-images.githubusercontent.com/90496643/169629595-ad06a23c-0d35-4abc-b503-951f37a0c8b5.png)
-  
+  ![tr_tst2](https://user-images.githubusercontent.com/90496643/169657752-c8af8566-50a2-4bbc-85b2-cd9b244e5ec6.png)
+
   
 In the future, it is planned to establish whether it is possible to fix transition probabilities based on the theory of population evolution. 
 Also change the approach to calculating the allele number for regions where no PTV is observed (the current estimate is rather rough, as well as $a$, $b$ for emission probabilities). 
