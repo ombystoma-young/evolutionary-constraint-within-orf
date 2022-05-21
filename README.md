@@ -38,11 +38,10 @@ Also mutation rates in the trinucleotide context were taken from the work of Kar
 ### Workflow
 
 First, we needed to obtain data on the coding DNA sequence (CDS) for the gene of interest, namely the nucleotide sequence itself, the CDS coordinates, as well as information about the observed PTV for this gene. The data obtaining scheme is presented below.
-  
-![data extraction_dark](https://user-images.githubusercontent.com/90496643/169656440-21dc1e00-4e72-41df-97f1-f0c8491a69a7.svg#gh-dark-mode-only)
-![data extraction_light](https://user-images.githubusercontent.com/90496643/169656437-3d3d2928-4034-4cdc-8660-05ef248b6951.svg#gh-light-mode-only)
 
-  
+![data extraction_dark_2](https://user-images.githubusercontent.com/90496643/169664239-98854a08-111e-4a45-816c-85a10cba0ecc.svg#gh-dark-mode-only)
+![data extraction_light_2](https://user-images.githubusercontent.com/90496643/169664240-1bbfa53d-faf8-49c7-ba5b-751b4dd90c42.svg#gh-light-mode-only)
+
   
 #### Stage 1. Sequence extraction  
   We started by getting the CDS coordinates from `.gff3` file. To do this, we used a combination of `grep`, `agrep` and `awk` (presented in the file `get_cds.sh`). In order to calculate the mutation rate in the trinucleotide context (described below), we also needed nucleotides before and after each region of coding DNA sequence (CDS).  
