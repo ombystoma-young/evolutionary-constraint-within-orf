@@ -128,11 +128,15 @@ The algorithm was tested on set of genes: mostly conservative, mostly non-conser
   
 There is a graph below showing the dependence of the allele counts per window for the regions of the gene ARFGEF1. In the case of a large number of alleles, the algorithm with the specified parameters copes with finding the most conservative region.
 
-  ![tr_tst2](https://user-images.githubusercontent.com/90496643/169657752-c8af8566-50a2-4bbc-85b2-cd9b244e5ec6.png)
+![ARFGEF1r_tst2_dark](https://user-images.githubusercontent.com/90496643/169666714-04c972ab-888f-4323-9f2c-168913935aaf.svg#gh-dark-mode-only)
+![ARFGEF1r_tst2_light](https://user-images.githubusercontent.com/90496643/169666735-c2461c30-aac0-4926-966b-a6b0498091de.svg#gh-light-mode-only)
+
 
   
 In the future, it is planned to establish whether it is possible to fix transition probabilities based on the theory of population evolution. 
 Also change the approach to calculating the allele number for regions where no PTV is observed (the current estimate is rather rough, as well as $a$, $b$ for emission probabilities). 
+
+
 
   
 
