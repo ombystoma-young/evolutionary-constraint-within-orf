@@ -21,9 +21,8 @@
 Genetic variants leading to loss of function are not found in all genes. If a gene is found under selection pressure, protein truncation variants (PTV) are much less common in them (Cassa C., 2017). Most often, such genes have important functions, and a such catastrophic change in the protein leads to various diseases or death (Samocha K., 2014). In this work, we are interested in the case when the division of genes into conservative (that is, under selection) and non-conservative (that is, free from selection) becomes less unambiguous, namely, cases when non-conservative genes are found in relatively conservative genes. This work is devoted to implementation of algorithm to the search for such sequences.
 
 
-### Goal:
+**Goal**: to estimate the evolutionary conservation of individual regions within single ORF.  
 
-To estimate the evolutionary conservation of individual regions within single ORF.
   
 The key task to achieve this goal was to implement an algorithm based on the hidden Markov model (HMM), which allows to determine the conservativeness of individual regions of the protein-coding sequence (CDS).
   
@@ -75,7 +74,7 @@ Next, we divided the gene into regions of fixed length, scanning window. We did 
 
 
  The resulting distribution of mutation rates corresponds to the expected: the mutation level for missense mutations is higher than the mutation level for synonymous variants, while loss-of-function (LoF) mutations are lower than all. 
-  For further analysis, we needed LoF mutation rates ($U$).
+  For further analysis, we needed LoF mutation rates $(U)$.
   
 
 #### Stage 4. Counting observed PTV 
