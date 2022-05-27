@@ -62,11 +62,11 @@ In this way, we obtained the DNA sequences necessary to calculate the expected p
   
 The next step is to calculate the mutation rate in the trinucleotide context for each codon. According to the work of Samocha K., 2014, the best context for determining the variability of a single nucleotide is the inclusion of both 5’ and 3’ flanking nucleotides. 
 We used mutation frequencies for each possible variant (G, T, C for A), specified in Supplement Materials to the work of Karczewski K.J., 2020.  
-Thus, for each nucleotide, we considered three possible substitutions in a trinucleotide context. At the same time, we consider this base as part of the codon and determine what such a variant leads to: synonymous, missense or nonsense mutation.
+Thus, for each nucleotide, we considered three possible substitutions in a trinucleotide context. At the same time, we consider this base as part of the codon and determine what such a variant leads to: synonymous, missense or nonsense mutation ([frequencies_count](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/freqcounter.py#L151) function in file [`freqcounter.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/freqcounter.py)).
   
 #### Stage 3. Computation of PTV mutation rate per window
   
-Next, we divided the gene into regions of fixed length, scanning window. We did not fix _window size_ it for all genes, because the length of genes varies very much, and in the case of too small values of the window size, it becomes problematic to resolve long non-conservative regions (if there are any). For each window, the sum of the expected frequencies was calculated (example for gene ARFGEF1 presented below).
+Next, we divided the gene into regions of fixed length, scanning window ([frequencies_per_window](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/freqcounter.py#L278) function in file [`freqcounter.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/freqcounter.py)). We did not fix _window size_ it for all genes, because the length of genes varies very much, and in the case of too small values of the window size, it becomes problematic to resolve long non-conservative regions (if there are any). For each window, the sum of the expected frequencies was calculated (example for gene ARFGEF1 presented below).
   
 ![test_rasterization_dark](https://user-images.githubusercontent.com/90496643/169657497-cd9d0be2-a419-49ee-a576-bae184c2005d.svg#gh-dark-mode-only)
 ![test_rasterization_light](https://user-images.githubusercontent.com/90496643/169657498-dfb865f8-253e-4b86-8a87-2b2800ae27a6.svg#gh-light-mode-only)
@@ -78,7 +78,7 @@ Next, we divided the gene into regions of fixed length, scanning window. We did 
   
 
 #### Stage 4. Counting observed PTV 
-Next, we calculated the sum of the observed variants (allele count, $n$) per each window, as well as the average value of allele number ($N$). `.tsv` with high-confidence pLOF variants were provided by Yury Barbitoff.  
+Next, we calculated the sum of the observed variants (allele count, $n$) per each window, as well as the average value of allele number ($N$) using function [observed_ptv](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/ploffinder.py#L5) in [`ploffinder.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/ploffinder.py). `.tsv` with high-confidence pLOF variants were provided by Yury Barbitoff (file [`variants_coords_ac_an_name.tsv`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/data/variants_coords_ac_an_name.tsv)).  
 For regions in which no protein truncation variants were detected, we took the $N$ value averaged over the entire gene (since we considered only genes containing at least one PTV).
   
 #### Stage 5. Hidden Markov model
@@ -106,22 +106,22 @@ As mentioned above, we have chosen $s_{het}$ as an estimate of conservativeness.
   
    $$P(n_i | \alpha, \beta; \nu_i) = \int  Pois(n_i, \nu_i / s_{het}) IG(s_{het};\alpha, \beta) ds_{het} $$  
   
-  We have chosen as the emission probabilities ($e_k(n_i)$ for $n_i$ in $k$-th state) the normalized probabilities obtained by taking a certain integral:
+  We have chosen as the emission probabilities ($e_k(n_i)$ for $n_i$ in $k$-th state) the normalized probabilities obtained by taking a certain integral ([emission_probabilities](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/emissionprobgetter.py#L87) function in [`emissionprobgetter.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/emissionprobgetter.py) file):
   
   $$ e_k(n_i) = \frac{P(n_i | \alpha, \beta; \nu_i; a, b)}{P(n_i | \alpha, \beta; \nu_i)} =  \frac{\int\limits_{a}^{b}  Pois(n_i, \nu_i / s_{het}) IG(s_{het};\alpha, \beta) ds_{het}}{P(n_i | \alpha, \beta; \nu_i)},$$
   
   where $a, b = [0, 0.01]$ for $k=Not$ and  $a, b = [0.01, 1]$ for $k=Cons$. The choice of such values is also due to the results obtained in the work  Cassa C. 2017.
   
-  Since we had no assumptions about the transition probabilities, we used the Baum–Welch algorithm to find transition probabilities corresponding to the maximum likelihood of the model.
+  Since we had no assumptions about the transition probabilities, we used the Baum–Welch algorithm to find transition probabilities corresponding to the maximum likelihood of the model (function [baum_welch_algo](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/hmmalg.py#L41) in file [`hmmalg.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/hmmalg.py)).
   
   #### Stage 5.2. Decoding sequence
   
-  The decoding of the path of states was carried out using the Viterbi algorithm, it consists in finding a path that also meets the maximum likelihood of the model.
+  The decoding of the path of states was carried out using the Viterbi algorithm (function [viterbi_algo](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/hmmalg.py#L73) in file [`hmmalg.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/hmmalg.py)), it consists in finding a path that also meets the maximum likelihood of the model.
    
   
 ### Results and future plans
   
- An algorithm based on the hidden Markov model for the estimation of conservativeness of individual regions of the protein-coding sequence was invented and implemented. Also, a complete pipeline for finding conservative regions for one gene was implemented with `Snakemake` v6.10.0 (Mölder F. 2021). To use it, it's needed to download and index the genome, as described above, and, specifying the desired gene name, window size and initial approximations of the transition probabilities at top of `snakefile`, run `Snakemake`.
+ An algorithm based on the hidden Markov model for the estimation of conservativeness of individual regions of the protein-coding sequence was invented and implemented ([conservativeness_estimator](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/5803ca531e6e99400d1802899676b257c62a029a/getconservativeness.py#L7) function in file [`getconservativeness.py`](https://github.com/ombystoma-young/evolutionary-constraint-within-orf/blob/main/getconservativeness.py) gathers all the previous ones and gives the result). Also, a complete pipeline for finding conservative regions for one gene was implemented with `Snakemake` v6.10.0 (Mölder F. 2021). To use it, it's needed to download and index the genome, as described above, and, specifying the desired gene name, window size and initial approximations of the transition probabilities at top of `Snakefile`, run `Snakemake`.
   
 The algorithm was tested on set of genes: mostly conservative, mostly non-conservative, presumably possessing regions of conservative, and it solves the first two cases and not so much sensitive for the third.
   
