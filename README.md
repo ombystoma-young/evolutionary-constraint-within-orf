@@ -87,7 +87,7 @@ For regions in which no protein truncation variants were detected, we took the $
 
 As observations, we choose the allele count per window $n$ (since it is finite, we can consider this quantity discrete).
 
-To assess conservativeness, we used a estimation of the selective effect against heterozygous PTVs ($s_{het}$) that takes into account for each region the observed value of protein truncation variants (PTV) $n$, the allele numbers $N$ and the expected mutation rate.
+To assess conservativeness, we used an estimation of the selective effect against heterozygous PTVs ($s_{het}$) that takes into account for each region the observed value of protein truncation variants (PTV) $n$, the allele numbers $N$ and the expected mutation rate.
  
 
 ![Evolutionary conservativeness of ORF regions_dark](https://user-images.githubusercontent.com/90496643/169657643-81083110-c36f-4316-9505-a6ef2bf2486f.svg#gh-dark-mode-only)
@@ -100,7 +100,7 @@ As mentioned above, we have chosen $s_{het}$ as an estimate of conservativeness.
   $$P(n_i | \alpha, \beta; \nu_i) = \int P(n_i|s_{het};\nu_i) P(s_{het};\alpha, \beta)ds_{het}, $$  
  where $\nu_i = N_iU_i$ - expected genic PTV counts. 
   
-  Further, $P(n_i|s_{het};\nu_i) = Pois(n_i, \lambda_i)$, where $\lambda_i=\nu_i / s_{het}$.  
+  Further, $P(n_i|s_{het};\nu_i) = Pois(n_i, \lambda_i),\ \mbox{where}\ \lambda_i=\nu_i / s_{het}$.  
   $P(s_{het};\alpha, \beta) = IG(s_{het};\alpha, \beta)$ is inverse Gaussian distribution with mean $\alpha$ and shape $\beta$ parameters (calculated for the gene as a whole). 
   Thus,
   
